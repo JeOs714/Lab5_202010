@@ -83,7 +83,7 @@ def loadAccidents (catalog, sep=','):
     referencia al libro que se esta procesando.
     """
     t1_start = process_time() #tiempo inicial
-    accidentsfile = cf.data_dir + 'UsAccidents/us_accidents_small.csv'
+    accidentsfile = cf.data_dir + 'UsAccidents/us_accidents_dis_2016.csv'
     dialect = csv.excel()
     dialect.delimiter=sep
     with open(accidentsfile, encoding="utf-8-sig") as csvfile:
@@ -112,7 +112,6 @@ def loadData (catalog):
     Carga los datos de los archivos y cargar los datos en la
     estructura de datos
     """
-    loadBooks(catalog)    
     loadAccidents(catalog)
 
 # Funciones llamadas desde la vista y enviadas al modelo
@@ -123,7 +122,7 @@ def getBookTree(catalog, bookTitle):
     #book=model.getBookInList(catalog, bookTitle)
     book=model.getBookTree(catalog, bookTitle) 
     t1_stop = process_time() #tiempo final
-    print("Tiempo de ejecución buscar libro:",t1_stop-t1_start," segundos")   
+    print("\n Tiempo de ejecución buscar los accidentes por una fecha:",t1_stop-t1_start," segundos")   
     if book:
         return book
     else:

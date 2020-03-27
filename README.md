@@ -1,3 +1,13 @@
+
+Santiago Usme - 201822047
+Jesús Ospino - 201915195
+
+Reflexión:
+
+Dado que en el requerimiento 1 se usaba un árbol BST, el cual no necesariamente está balanceado, el tiempo de respuesta
+era mayor que el requerimiento 2 en el cual se usa un árbol RBT. Si bien el RBT tarda un poco más de tiempo que el BST en formarse, 
+tiene menor complejidad temporal a la hora de dar respuesta al usuario, dada su altura menor a la BST. 
+
 # Lab5_202010
 
 Este repositorio contiene una plantilla del laboratorio 5 con un ejemplo de un ADT mapa ordenado que está implementado sobre un árbol rojo y negro (RBT). La aplicación está construida bajo el patrón Modelo-Vista-Controlador que carga datos y realiza consultas usando las estructuras de datos implementadas. Para iniciar la aplicación debe ejecutar: 
