@@ -84,14 +84,16 @@ def main():
             print ('Altura arbol: ' + str(map.height(catalog['AccidentsTree'])))
                
             
-        elif int(inputs[0]==2):
-            Date= input("Ingrese la fecha para la cual desea buscar en el formato Año-Mes-Día: ")
-            res= controller.getSeverityByDate(catalog, Date)
+        elif int(inputs[0])==2:
+            print("Para ingresar la fecha, el formato de la misma debe ser: Año-Mes-Día." +"\n"
+            +"Por ejemplo, si desea buscar el 2 de Agosto de 2016, la entrada sería: 2016-02-08")
+            date= input("Ingrese la fecha para la cual desea buscar las severidades: ")
+            res = controller.getSeverityByDate(catalog, date)
             if res:
                 print(res)
             else:
-                print("No se encontraron accidentes para la fecha ",Date) 
-
+                print("No se encontraron accidentes para la fecha ",date)
+            
         elif int(inputs[0])==6:
             title = input("Nombre del titulo a buscar: ")
             book = controller.getBookTree(catalog,title)
