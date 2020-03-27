@@ -63,8 +63,10 @@ def newAccident (row):
     return accident
 
 def newAccidentDate(catalog, row):
-    accident = {"id": None, "Date": row["Start_Time"].split(" ")[0]}
+    accident = {"id": None, "Date": row["Start_Time"].split(" ")[0], "Severity": None}
     accident["id"]= lt.newList("ARRAY_LIST")
+    accident["Severity"]= map.newMap()
+    map.put(accident["Severity"], row["Severity"], 1, compareByKey)
     lt.addLast(accident['id'],row['ID'])
 
     return accident 
@@ -93,7 +95,14 @@ def addAccidentDate (catalog, row):
     Exist=tree.get(Accidents,row["Start_Time"].split(" ")[0], greater)
     if Exist:
         lt.addLast(Exist['id'],row['ID'])
-        tree.put(catalog['AccidentsTree'],row["Start_Time"].split(" ")[0],Exist, greater)
+        Contador= row["Severity"]
+        Nuevovalor= map.get(Exist["Severity"], Contador, compareByKey)
+        if Nuevovalor:
+            Nuevovalor+=1
+            map.put(Exist["Severity"], Contador, Nuevovalor, compareByKey)
+        else:
+            map.put(Exist["Severity"], Contador, 1, compareByKey)
+        tree.put(catalog['AccidentsTree'],row["Start_Time"].split(" ")[0],Exist, greater)    
         #director['sum_average_rating'] += float(row['vote_average'])
     else:
         Accident= newAccidentDate(catalog, row)
