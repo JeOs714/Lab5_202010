@@ -45,9 +45,69 @@ def newCatalog():
     catalog['booksTitleTree'] = tree.newMap ()
     catalog['yearsTree'] = tree.newMap ()
     catalog['booksList'] = lt.newList("ARRAY_LIST")
+    catalog['AccidentsTree'] = tree.newMap ()
+    catalog['AccidentsList'] = lt.newList("ARRAY_LIST")
     return catalog
 
+def newAccident (row):
+    """
+    Crea una nueva estructura para almacenar un libro 
+    """
+    accident = {"id": row['ID'], "Time": {}, "Country":row['Country']}
+    accident["Time"]["DateI"]= row['Start_Time'].split(" ")[0]
+    accident["Time"]["DateF"]= row['End_Time'].split(" ")[0]
+    accident["Time"]["HourI"]= row['Start_Time'].split(" ")[1]
+    accident["Time"]["HourF"]= row['End_Time'].split(" ")[1]
+    accident["Time"]["DateHI"]= lt.newList("ARRAY_LIST")
+    accident["Time"]["DateHF"]= lt.newList("ARRAY_LIST")
+    return accident
 
+def newAccidentDate(catalog, row):
+    accident = {"id": None, "Date": row["Start_Time"].split(" ")[0]}
+    accident["id"]= lt.newList("ARRAY_LIST")
+    lt.addLast(accident['id'],row['ID'])
+
+    return accident 
+
+def addBookList (catalog, row):
+    """
+    Adiciona libro a la lista
+    """
+    books = catalog['booksList']
+    book = newBook(row)
+    lt.addLast(books, book)
+def addAccidentList (catalog, row):
+    """
+    Adiciona libro a la lista
+    """
+    accidents = catalog['AccidentsList']
+    accident = newAccident(row)
+    lt.addLast(accidents, accident)
+
+def addAccidentDate (catalog, row):
+    """
+    Adiciona libro al map con key=title
+    """
+    #catalog['booksTree'] = map.put(catalog['booksTree'], int(book['book_id']), book, greater)
+    Accidents= catalog['AccidentsTree']
+    Exist=tree.get(Accidents,row["Start_Time"].split(" ")[0], greater)
+    if Exist:
+        lt.addLast(Exist['id'],row['ID'])
+        tree.put(catalog['AccidentsTree'],row["Start_Time"].split(" ")[0],Exist, greater)
+        #director['sum_average_rating'] += float(row['vote_average'])
+    else:
+        Accident= newAccidentDate(catalog, row)
+        catalog['AccidentsTree']  = tree.put(Accidents , Accident["Date"], Accident, greater)
+        #tree.put(Accidents, Accident['Date'], Accident, greater)
+        
+
+def addAccidentMap1 (catalog, row):
+    """
+    Adiciona libro al map con key=title
+    """
+    accident= newAccident(row)
+    #catalog['booksTree'] = map.put(catalog['booksTree'], int(book['book_id']), book, greater)
+    catalog['AccidentsTree']  = tree.put(catalog['AccidentsTree'] , accident['Time']["DateHI"] , accident, greater)
 def newBook (row):
     """
     Crea una nueva estructura para almacenar un libro 
