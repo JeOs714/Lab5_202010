@@ -124,14 +124,6 @@ def newBook (row):
     book = {"book_id": row['book_id'], "title":row['title'], "average_rating":row['average_rating'], "ratings_count":row['ratings_count']}
     return book
 
-def addBookList (catalog, row):
-    """
-    Adiciona libro a la lista
-    """
-    books = catalog['booksList']
-    book = newBook(row)
-    lt.addLast(books, book)
-
 def addBookTree (catalog, row):
     """
     Adiciona libro al tree con key=title
@@ -206,6 +198,18 @@ def getBookByYearRating (catalog, year):
             response += 'Rating '+str(ratingKey) + ':' + str(map.get(yearElement['ratingMap'],ratingKey,compareByKey)) + '\n'
         return response
     return None
+def getSeverityByDate(catalog, date):
+    Año= tree.get(catalog["AccidentsTree"], date, greater)
+    res=""
+    if Año:
+        Severidades= map.keySet(Año["Severity"])
+        iterator=it.newIterator(Severidades)
+        while it.hasNext(iterator):
+            SevKey = it.next(iterator)
+            res += 'Severidad'+str(SevKey) + ':' + str(map.get(Año["Severity"],SevKey,compareByKey)) + '\n'
+        return res
+    return None
+
 
 # Funciones de comparacion
 

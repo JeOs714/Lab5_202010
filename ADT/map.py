@@ -25,7 +25,7 @@ from DataStructures import mapstructure as ht
 
 
 
-def newMap( capacity=17, prime=109345121, maptype='CHAINING') :
+def newMap( capacity=5, prime=109345121, maptype='CHAINING') :
     """
     Crea una tabla de simbolos (map) con capacidad 'capacity'
     Prime es utilizado para la función de hash 

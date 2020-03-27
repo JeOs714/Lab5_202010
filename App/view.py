@@ -41,7 +41,7 @@ operación solicitada
 def printMenu():
     print("Bienvenido al Laboratorio 5")
     print("1- Cargar información")
-    print("2- Buscar libro por llave (titulo) ")
+    print("2- Requerimiento 2")
     print("3- Consultar cuantos libros hay alfabeticamente menores a una llave (titulo) - (rank)")
     print("4- Buscar un libro por posición de la llave (titulo) - (select)")
     print("5- Consultar la cantidad de libros por rating para un año (YYYY) dado")
@@ -80,13 +80,19 @@ def main():
             print ('Altura árbol por titulo: ' + str(map.height(catalog['booksTitleTree'])))
             print ('Altura árbol por año: ' + str(map.height(catalog['yearsTree'])))
             print ('Arbol Accidentes cargados: ' + str(map.size(catalog['AccidentsTree'])))
-            print(catalog["AccidentsTree"] )
             print ('Lista Accidentes cargados: ' + str(lt.size(catalog['AccidentsList'])))
             print ('Altura arbol: ' + str(map.height(catalog['AccidentsTree'])))
+               
             
-            
-            
-        elif int(inputs[0])==2:
+        elif int(inputs[0]==2):
+            Date= input("Ingrese la fecha para la cual desea buscar en el formato Año-Mes-Día: ")
+            res= controller.getSeverityByDate(catalog, Date)
+            if res:
+                print(res)
+            else:
+                print("No se encontraron accidentes para la fecha ",Date) 
+
+        elif int(inputs[0])==6:
             title = input("Nombre del titulo a buscar: ")
             book = controller.getBookTree(catalog,title)
             if book:

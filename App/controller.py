@@ -149,4 +149,12 @@ def getBookByYearRating (catalog, year):
     t1_stop = process_time() #tiempo final
     print("Tiempo de ejecución consultar libros por año:",t1_stop-t1_start," segundos")   
     return resp
+
+def getSeverityByDate(catalog, date):
+    t1_start = process_time() #tiempo inicial
+    resp = model.getSeverityByDate(catalog, date)
+    t1_stop = process_time() #tiempo final
+    print("Tiempo de ejecución consultar libros por año:",t1_stop-t1_start," segundos")   
+    return resp
+
     
