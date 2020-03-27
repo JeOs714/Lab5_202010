@@ -204,9 +204,10 @@ def getSeverityByDate(catalog, date):
     if Año:
         Severidades= map.keySet(Año["Severity"])
         iterator=it.newIterator(Severidades)
+        res+= "El total de accidentes la fecha " + str(date) + " fue "+ str(lt.size(Año["id"]))+ "\n"
         while it.hasNext(iterator):
             SevKey = it.next(iterator)
-            res += 'Severidad'+str(SevKey) + ':' + str(map.get(Año["Severity"],SevKey,compareByKey)) + '\n'
+            res += 'Severidad '+str(SevKey) + ' : ' + str(map.get(Año["Severity"],SevKey,compareByKey)) + '\n'
         return res
     return None
 
